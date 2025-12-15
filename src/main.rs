@@ -1,4 +1,11 @@
-use std::{fs::{write, File}, io::{self, Read, Write}};
+use std::{
+    fs::{
+	write, File, OpenOptions
+	},
+    io::{
+	self, Read, Write, Seek, SeekFrom
+	}
+};
 use anyhow::{Context, Result};
 use clap::Parser;
 mod arguments;
@@ -16,8 +23,14 @@ fn main() -> Result<()> {
         _ => panic!("invalid MBR signature") 
     };
     if let Some(output) = args.output {
-        write(output, buffer)?;
-        return Ok(())
+       let mut file = OpenOptions::new()
+       	   .read(true)
+	   .write(true)
+	   .open(output)?;
+       file.seek(SeekFrom::Start(0))?;
+       file.write_all(&buffer)?;
+       file.sync_data()?;
+       return Ok(());
     }
     let mbr_data = &mut buffer
         .chunks(args.chunk_bytes);
