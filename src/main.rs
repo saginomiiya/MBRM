@@ -54,14 +54,14 @@ fn main() -> Result<()> {
                 if !args.no_color {
                     match hex_dump_offset + byte_index {
                         0x00000..0x001B8 => character.on_truecolor(75,0,130),
-			0x001B8..0x001BC => character.on_truecolor(139,0,0),
-			0x001BC..0x001BE => character.on_truecolor(238,130,238),
-			0x001BE..0x001CE => character.on_red(),
-			0x001CE..0x001DE => character.on_blue(),
-			0x001DE..0x001EE => character.on_green(),
-			0x001EE..0x001FE => character.on_yellow(),
-                        0x001FE if x == 0x55 => character.on_truecolor(85,107,47),
-			0x001FF if x == 0xAA => character.on_truecolor(178,0,178),
+						0x001B8..0x001BC => character.on_truecolor(139,0,0),
+						0x001BC..0x001BE => character.on_truecolor(238,130,238),
+						0x001BE..0x001CE => character.on_red(),
+						0x001CE..0x001DE => character.on_blue(),
+						0x001DE..0x001EE => character.on_green(),
+						0x001EE..0x001FE => character.on_yellow(),
+						0x001FE if x == 0x55 => character.on_truecolor(85,107,47),
+						0x001FF if x == 0xAA => character.on_truecolor(178,0,178),
                         _ => character.on_black(),
                     }.to_string()
                 } else { character } 
