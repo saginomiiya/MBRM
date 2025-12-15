@@ -24,9 +24,9 @@ fn main() -> Result<()> {
     };
     if let Some(output) = args.output {
        let mut file = OpenOptions::new()
-       	   .read(true)
-	   .write(true)
-	   .open(output)?;
+            .read(true)
+            .write(true)
+            .open(output)?;
        file.seek(SeekFrom::Start(0))?;
        file.write_all(&buffer)?;
        file.sync_data()?;
